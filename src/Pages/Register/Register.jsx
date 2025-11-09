@@ -1,7 +1,18 @@
 import React from 'react';
 import signupImage from '../../assets/SignUp.png'
 import { Link } from 'react-router';
+import UseAuth from '../../Hook/UseAuth';
 const Register = () => {
+  const {googleSign,setUser}=UseAuth();
+   const googleHandle=(e)=>{
+      e.preventDefault();
+      googleSign()
+      .then(result=>{
+        console.log(result.user);
+        setUser(result.user)
+      })
+      .catch(err=>console.log(err))
+    }
     return (
            <div>
       <div className="hero min-h-screen">
@@ -39,7 +50,7 @@ const Register = () => {
                 <button className="customBtn btn mt-4 py-4 text-lg">Sign Up</button>
                 <div className="text-gray-500">Already have an Account? <Link to={"/login"} className="text-blue-700 hover:text-blue-500 font-semibold">Sign In</Link> </div>
                 <div className="text-center">or</div>
-                <button className="btn bg-white text-black border-[#e5e5e5]">
+                <button className="btn bg-white text-black border-[#e5e5e5]" onClick={googleHandle}>
                   <svg
                     aria-label="Google logo"
                     width="16"
