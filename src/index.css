@@ -4,7 +4,11 @@
 }
 
 .customBtn{
-  @apply bg-linear-to-r from-purple-500 to-pink-500
+  @apply btn text-lg text-white bg-linear-to-r from-purple-500 to-pink-500
   opacity-90 hover:opacity-100 
 transition-all duration-1000 ease-in-out  hover:shadow-lg hover:shadow-purple-300/50
+}
+
+.active{
+  @apply text-gray-800 border-b-2
 }

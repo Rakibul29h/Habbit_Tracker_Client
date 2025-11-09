@@ -13,6 +13,15 @@ const Register = () => {
       })
       .catch(err=>console.log(err))
     }
+
+    const handleForm=(e)=>{
+      e.preventDefault();
+      const name=e.target.name.value;
+      const email=e.target.email.value;
+      const photoUrl=e.target.photoUrl.value;
+      const password=e.target.password.value;
+      console.log({name,email,photoUrl,password})
+    }
     return (
            <div>
       <div className="hero min-h-screen">
@@ -20,7 +29,7 @@ const Register = () => {
           <div className="card bg-base-100 w-full flex-1 shadow-2xl">
             <div className="card-body">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">Sign Up</h2>
-              <form className="fieldset text-lg">
+              <form className="fieldset text-lg" onSubmit={handleForm}>
                 <label className="label">Name</label>
                 <input
                   type="text"
@@ -33,6 +42,7 @@ const Register = () => {
                   type="email"
                   className="input w-full focus:outline-none"
                   placeholder="Email"
+                  name='email'
                 />
                                 <label className="label">Photo URL</label>
                 <input
@@ -46,6 +56,7 @@ const Register = () => {
                   type="password"
                   className="input w-full focus:outline-none"
                   placeholder="Password"
+                  name='password'
                 />
                 <button className="customBtn btn mt-4 py-4 text-lg">Sign Up</button>
                 <div className="text-gray-500">Already have an Account? <Link to={"/login"} className="text-blue-700 hover:text-blue-500 font-semibold">Sign In</Link> </div>

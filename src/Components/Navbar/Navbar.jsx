@@ -1,9 +1,25 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router';
+import UseAuth from '../../Hook/UseAuth';
+import person from '../../assets/person.png'
 
 const Navbar = () => {
+  const {user,logOut}=UseAuth();
+ const handleSignOut=()=>{
+  logOut()
+  .then
+ }
+  console.log(user)
     const link=<>
-        <li to={"/"}>Home</li>
-        <li to={"/publicHabit"}>Browse public Habits</li>
+
+        <NavLink to={"/"}>Home</NavLink>
+        {
+          user?<>
+          <NavLink to={"/addHabit"}>Add Habit</NavLink>
+          <NavLink to={"/myHabit"}>My Habit</NavLink>
+          </>:""
+        }
+        <NavLink to={"/publicHabit"}>Browse Public Habits</NavLink>
         
     </>
     return (
@@ -16,19 +32,29 @@ const Navbar = () => {
       </div>
       <ul
         tabIndex="-1"
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        className="menu text-xl menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
        {link}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <Link to={"/"} className="btn btn-ghost text-xl">Habit Tracker</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1 flex gap-5">
+    <ul className="menu text-lg text-gray-500 font-semibold menu-horizontal px-1 flex gap-6">
      {link}
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    {
+      user?   <div className="dropdown dropdown-end">
+  <div tabIndex={0} role="button" className='px-4' > <img className='w-10 h-10 rounded-full ' src={user.photoURL? user.photoURL :person } alt="" />  </div>
+  <ul tabIndex="-1" className="dropdown-content mt-4 text-lg menu bg-base-100 rounded-box z-1 p-2 shadow-sm">
+    <li className='hover:bg-gray-200 py-2 px-3 rounded-lg'>{user?.displayName}</li>
+    <li className='hover:bg-gray-200 py-2 px-3 rounded-lg'>{user?.email}</li>
+    <li className='customBtn' onClick={handleSignOut}>Sign Out</li>
+  </ul>
+</div>:<Link to={"/login"} className='btn customBtn' >Sign In</Link>
+    }
+
   </div>
 </div>
         </div>
