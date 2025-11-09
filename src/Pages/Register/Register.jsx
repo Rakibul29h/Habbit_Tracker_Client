@@ -1,9 +1,13 @@
 import React from 'react';
 import signupImage from '../../assets/SignUp.png'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import UseAuth from '../../Hook/UseAuth';
+import toast, { Toaster } from 'react-hot-toast';
+
 const Register = () => {
-  const {googleSign,setUser}=UseAuth();
+  const {googleSign,setUser,createUser,updateUser}=UseAuth();
+
+  const navigate=useNavigate();
    const googleHandle=(e)=>{
       e.preventDefault();
       googleSign()
@@ -20,7 +24,37 @@ const Register = () => {
       const email=e.target.email.value;
       const photoUrl=e.target.photoUrl.value;
       const password=e.target.password.value;
-      console.log({name,email,photoUrl,password})
+
+ if (!/[A-Z]/.test(password)) {
+  toast.error( "Password must contain at least one uppercase letter");
+    return;
+  }
+  if (!/[a-z]/.test(password)) {
+    toast.error("Password must contain at least one lowercase letter")
+    return ;
+  }
+  if (!/^.{6,}$/.test(password)) {
+    toast.error( "Password must be at least 6 characters long")
+    return;
+  }
+      createUser(email,password)
+      .then(result=>{
+        const user=result.user;
+        
+        updateUser({displayName:name,photoURL:photoUrl})
+        .then(()=>{
+          setUser({...user,displayName:name,photoURL:photoUrl});
+          navigate("/");
+        }).catch(err=>
+          toast.error("Something Went Wrong")
+        )
+
+      }).catch((err)=>{
+
+        const msg = err.message.replace("Firebase: Error (auth/", "").replace(").", "");
+  toast.error(msg|| "Somethings went wrong!");
+      })
+
     }
     return (
            <div>
@@ -42,6 +76,7 @@ const Register = () => {
                   type="email"
                   className="input w-full focus:outline-none"
                   placeholder="Email"
+                  required
                   name='email'
                 />
                                 <label className="label">Photo URL</label>
@@ -57,6 +92,7 @@ const Register = () => {
                   className="input w-full focus:outline-none"
                   placeholder="Password"
                   name='password'
+                  required
                 />
                 <button className="customBtn btn mt-4 py-4 text-lg">Sign Up</button>
                 <div className="text-gray-500">Already have an Account? <Link to={"/login"} className="text-blue-700 hover:text-blue-500 font-semibold">Sign In</Link> </div>
@@ -99,6 +135,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+  
     </div>
     );
 };

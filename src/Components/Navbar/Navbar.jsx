@@ -2,14 +2,18 @@ import React from 'react';
 import { Link, NavLink } from 'react-router';
 import UseAuth from '../../Hook/UseAuth';
 import person from '../../assets/person.png'
+import toast from 'daisyui/components/toast';
+import { Toaster } from 'react-hot-toast';
 
 const Navbar = () => {
   const {user,logOut}=UseAuth();
  const handleSignOut=()=>{
   logOut()
-  .then
+  .catch(err=>{
+    toast.error(err)
+  })
  }
-  console.log(user)
+
     const link=<>
 
         <NavLink to={"/"}>Home</NavLink>
@@ -57,6 +61,7 @@ const Navbar = () => {
 
   </div>
 </div>
+
         </div>
     );
 };
