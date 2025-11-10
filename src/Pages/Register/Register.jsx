@@ -44,6 +44,7 @@ const Register = () => {
         updateUser({displayName:name,photoURL:photoUrl})
         .then(()=>{
           setUser({...user,displayName:name,photoURL:photoUrl});
+          toast.success("Account created Successfully");
           navigate("/");
         }).catch(err=>
           toast.error("Something Went Wrong")

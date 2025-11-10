@@ -1,28 +1,48 @@
 import React from "react";
 import logInimage from "../../assets/LogIn.png";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import UseAuth from "../../Hook/UseAuth";
+
+import { toast } from 'react-hot-toast';
 const LogIn = () => {
 
-    const {googleSign,setUser}=UseAuth();
+    const {googleSign,setUser,signIn}=UseAuth();
+  const navigate=useNavigate();
+  const location=useLocation();
+ 
+    const handleLogIn=(e)=>{
+      e.preventDefault();
+
+      const email=e.target.email.value;
+      const password=e.target.password.value;
+      signIn(email,password)
+      .then(result=>{
+        setUser(result.user);
+        toast.success("Log In successful!")
+        navigate(`${location.state ? location.state: "/"}`);
+      }).catch(err=>{
+        console.log(err);
+      })
+    }
     const googleHandle=(e)=>{
       e.preventDefault();
       googleSign()
       .then(result=>{
-        console.log(result.user);
+    
         setUser(result.user)
+        navigate(location?.state || "/");
       })
       .catch(err=>console.log(err))
     }
  
   return (
     <div>
-      <div className="hero min-h-screen">
+      <div className="hero min-h-screen w-full">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="card bg-base-100 flex-1 shadow-2xl">
             <div className="card-body">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">Sign In</h2>
-              <form className="fieldset text-lg m-2">
+              <form className="fieldset text-lg m-2" onSubmit={handleLogIn}>
                 <label className="label">Email</label>
                 <input
                   type="email"
