@@ -1,76 +1,93 @@
-import React from 'react';
-import signupImage from '../../assets/SignUp.png'
-import { Link, useNavigate } from 'react-router';
-import UseAuth from '../../Hook/UseAuth';
-import toast, { Toaster } from 'react-hot-toast';
+import React from "react";
+import signupImage from "../../assets/SignUp.png";
+import { Link, useNavigate } from "react-router";
+import UseAuth from "../../Hook/UseAuth";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 const Register = () => {
-  const {googleSign,setUser,createUser,updateUser}=UseAuth();
+  const { googleSign, setUser, createUser, updateUser } = UseAuth();
 
-  const navigate=useNavigate();
-   const googleHandle=(e)=>{
-      e.preventDefault();
-      googleSign()
-      .then(result=>{
+  const navigate = useNavigate();
+  const googleHandle = (e) => {
+    e.preventDefault();
+    googleSign()
+      .then((result) => {
         console.log(result.user);
-        setUser(result.user)
+        setUser(result.user);
       })
-      .catch(err=>console.log(err))
+      .catch((err) => console.log(err));
+  };
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const photoUrl = e.target.photoUrl.value;
+    const password = e.target.password.value;
+
+    if (!/[A-Z]/.test(password)) {
+      toast.error("Password must contain at least one uppercase letter");
+      return;
     }
+    if (!/[a-z]/.test(password)) {
+      toast.error("Password must contain at least one lowercase letter");
+      return;
+    }
+    if (!/^.{6,}$/.test(password)) {
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
 
-    const handleForm=(e)=>{
-      e.preventDefault();
-      const name=e.target.name.value;
-      const email=e.target.email.value;
-      const photoUrl=e.target.photoUrl.value;
-      const password=e.target.password.value;
+        updateUser({ displayName: name, photoURL: photoUrl })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photoUrl });
+            const newUser = { name: name, email: email, photoURL: photoUrl };
 
- if (!/[A-Z]/.test(password)) {
-  toast.error( "Password must contain at least one uppercase letter");
-    return;
-  }
-  if (!/[a-z]/.test(password)) {
-    toast.error("Password must contain at least one lowercase letter")
-    return ;
-  }
-  if (!/^.{6,}$/.test(password)) {
-    toast.error( "Password must be at least 6 characters long")
-    return;
-  }
-      createUser(email,password)
-      .then(result=>{
-        const user=result.user;
-        
-        updateUser({displayName:name,photoURL:photoUrl})
-        .then(()=>{
-          setUser({...user,displayName:name,photoURL:photoUrl});
-          toast.success("Account created Successfully");
-          navigate("/");
-        }).catch(err=>
-          toast.error("Something Went Wrong")
-        )
+            axios
+              .post("http://localhost:3000/users", newUser, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+              .then((res) => {
+                console.log(res.data);
+              })
+              .catch((err) => console.log(err));
 
-      }).catch((err)=>{
-
-        const msg = err.message.replace("Firebase: Error (auth/", "").replace(").", "");
-  toast.error(msg|| "Somethings went wrong!");
+            toast.success("Account created Successfully");
+         
+            navigate("/");
+          })
+          .catch((err) => toast.error("Something Went Wrong"));
       })
-
-    }
-    return (
-           <div>
+      .catch((err) => {
+        const msg = err.message
+          .replace("Firebase: Error (auth/", "")
+          .replace(").", "");
+        toast.error(msg || "Somethings went wrong!");
+      });
+         e.target.reset();
+  };
+  return (
+    <div>
       <div className="hero min-h-screen">
         <div className="hero-content w-full  flex-col lg:flex-row-reverse">
           <div className="card bg-base-100 w-full flex-1 shadow-2xl">
             <div className="card-body">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">Sign Up</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">
+                Sign Up
+              </h2>
               <form className="fieldset text-lg" onSubmit={handleForm}>
                 <label className="label">Name</label>
                 <input
                   type="text"
                   className="input w-full focus:outline-none"
                   placeholder="Name"
-                  name='name'
+                  name="name"
                 />
                 <label className="label">Email</label>
                 <input
@@ -78,27 +95,40 @@ const Register = () => {
                   className="input w-full focus:outline-none"
                   placeholder="Email"
                   required
-                  name='email'
+                  name="email"
                 />
-                                <label className="label">Photo URL</label>
+                <label className="label">Photo URL</label>
                 <input
                   type="text"
                   className="input w-full focus:outline-none"
                   placeholder="Photo Url"
-                  name='photoUrl'
+                  name="photoUrl"
                 />
                 <label className="label">Password</label>
                 <input
                   type="password"
                   className="input w-full focus:outline-none"
                   placeholder="Password"
-                  name='password'
+                  name="password"
                   required
                 />
-                <button className="customBtn btn mt-4 py-4 text-lg">Sign Up</button>
-                <div className="text-gray-500">Already have an Account? <Link to={"/login"} className="text-blue-700 hover:text-blue-500 font-semibold">Sign In</Link> </div>
+                <button className="customBtn btn mt-4 py-4 text-lg">
+                  Sign Up
+                </button>
+                <div className="text-gray-500">
+                  Already have an Account?{" "}
+                  <Link
+                    to={"/login"}
+                    className="text-blue-700 hover:text-blue-500 font-semibold"
+                  >
+                    Sign In
+                  </Link>{" "}
+                </div>
                 <div className="text-center">or</div>
-                <button className="btn bg-white text-black border-[#e5e5e5]" onClick={googleHandle}>
+                <button
+                  className="btn bg-white text-black border-[#e5e5e5]"
+                  onClick={googleHandle}
+                >
                   <svg
                     aria-label="Google logo"
                     width="16"
@@ -136,9 +166,8 @@ const Register = () => {
           </div>
         </div>
       </div>
-  
     </div>
-    );
+  );
 };
 
 export default Register;

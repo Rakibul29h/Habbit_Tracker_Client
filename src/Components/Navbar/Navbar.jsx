@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router";
 import UseAuth from "../../Hook/UseAuth";
 import person from "../../assets/person.png";
 import toast from "daisyui/components/toast";
-import { Toaster } from "react-hot-toast";
+
 
 const Navbar = () => {
   const { user, logOut, loading } = UseAuth();
