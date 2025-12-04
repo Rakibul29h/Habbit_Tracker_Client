@@ -23,7 +23,7 @@ const AddHabits = () => {
     const formData = new FormData();
     formData.append("image", file);
       toast.success("Adding Habit....")
-      console.log(typeof(formData))
+  
     const result = await axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${ import.meta.env.VITE_imgBB}`
      ,
       formData
@@ -43,7 +43,7 @@ const AddHabits = () => {
       status:0,
     };
    
-  
+
     axiosSecure.post("/habit",newHabit)
     .then((data)=>{
       if(data.data.insertedId)
@@ -146,7 +146,7 @@ const AddHabits = () => {
                   />
                   Public
                 </label>
-                <label className="flex text-[1rem] items-center gap-2">
+                <label className="flex text-lg items-center gap-2">
                   <input
                     type="radio"
                     name="visibility"
