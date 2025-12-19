@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
@@ -16,9 +15,9 @@ const Banner = () => {
       >
       <div className="bg-linear-to-r from-orange-200 to-lime-800 min-h-[90vh] flex justify-center items-center text-primary-content">
         <div className=" container mx-auto px-6 py-20 text-center">
-          <motion.h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Build Better Habits, One Day at a Time
-          </motion.h1>
+          </h1>
           <p className="max-w-2xl mx-auto text-lg mb-8">
             Track your daily habits, build powerful streaks, and boost your
             productivity with consistency.

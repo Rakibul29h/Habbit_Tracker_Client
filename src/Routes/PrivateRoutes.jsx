@@ -7,7 +7,7 @@ const PrivateRoutes = ({children}) => {
     const {user,loading}=UseAuth( );
     const location=useLocation();
     if(loading)
-        return <Loading></Loading>
+        return <div className="min-h-screen flex items-center justify-center"><Loading></Loading></div>
     if(user)
     {
         return children
