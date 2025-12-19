@@ -1,8 +1,12 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
+@plugin "daisyui" ;
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: oklch(70.5% 0.213 47.604);
+  --color-secondary: teal;
+  --color-accent:#E74C3C;
 }
-
 .customBtn{
   @apply btn text-lg text-white bg-linear-to-r from-purple-500 to-pink-500
   opacity-90 hover:opacity-100 

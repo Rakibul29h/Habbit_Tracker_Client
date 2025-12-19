@@ -8,6 +8,7 @@ import MyHabits from '../Pages/Mybids/MyHabits';
 import AddHabits from '../Pages/AddHabits/AddHabits';
 import PublicHabit from '../Pages/PublicHabit/PublicHabit';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
+import Home from '../Pages/HomePage/Home';
 
  export const router=createBrowserRouter([
     {
@@ -15,6 +16,10 @@ import ErrorPage from '../Pages/ErrorPage/ErrorPage';
         element:<MainLayout></MainLayout>,
          errorElement: <ErrorPage></ErrorPage>,
         children:[
+            {
+                index:"true",
+                element:<Home></Home>
+            },
             {
                 path:"/login",
                 element:<LogIn></LogIn>

@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 
+
 const AddHabits = () => {
   const { user } = UseAuth();
   const axiosSecure=useAxiosSecure();
@@ -21,14 +22,22 @@ const AddHabits = () => {
     const category = e.target.category.value;
     const visibility=e.target.visibility.value;
     const formData = new FormData();
-    formData.append("image", file);
+    
+    let photoURL;
+    if(!file)
+    {
+      photoURL=""
+    }else{
+          formData.append("image", file);
       toast.success("Adding Habit....")
   
-    const result = await axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${ import.meta.env.VITE_imgBB}`
+    const result = await axios.post(`https://api.imgbb.com/1/upload?key=${ import.meta.env.VITE_imgBB}`
      ,
       formData
     );
-    const photoURL = result.data.data.display_url;
+     photoURL = result.data.data.display_url;
+    }
+
     const newHabit = {
       name,
       email,
@@ -46,6 +55,7 @@ const AddHabits = () => {
 
     axiosSecure.post("/habit",newHabit)
     .then((data)=>{
+      console.log(data.data)
       if(data.data.insertedId)
       {
         toast.success("Habit added Successfully!")
@@ -90,6 +100,7 @@ const AddHabits = () => {
             className="input w-full focus:outline-none"
             placeholder="Enter Title"
             name="title"
+            required
           />
           <label className="label">Description</label>
           <textarea
