@@ -28,9 +28,9 @@ const LogIn = () => {
  
   return (
     <div>
-      <div className="hero min-h-screen w-full">
-        <div className="hero-content md:min-w-[400px] flex-col ">
-          <div className="card bg-base-100 flex-1 border border-gray-100 shadow-2xl">
+      <div className="hero px-5 min-h-screen w-full">
+
+          <div className="card bg-base-100 w-full sm:max-w-[500px] border border-gray-100 shadow-2xl">
             <div className="card-body">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">Sign In</h2>
               <form className="fieldset  m-2" onSubmit={handleLogIn}>
@@ -60,7 +60,7 @@ const LogIn = () => {
           </div>
         </div>
       </div>
-    </div>
+
   );
 };
 

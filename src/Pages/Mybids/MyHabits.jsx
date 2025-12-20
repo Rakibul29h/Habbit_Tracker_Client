@@ -109,11 +109,11 @@ const MyHabits = () => {
   if(loading) return<div className="min-h-screen flex items-center justify-center"><Loading></Loading></div>
   return (
     <div>
-      <div className="my-4 md:my-10 px-1 md:px-5 text-center">
+      <div className="my-4 md:my-10 w-full px-1 md:px-5 text-center">
         <h2 className="text-3xl md:text-4xl font-bold">My habits</h2>
         <p className="my-2 text-lg text-gray-500">Small habits today, a better version of you tomorrow</p>
       </div>
-      <div>
+      <div className="w-full">
               {habit?.length > 0 ? (
         <>
           <div className="overflow-x-auto my-10 md:my-15 px-2 md:px-5 h-full w-full">
@@ -293,7 +293,7 @@ const MyHabits = () => {
           </dialog>
         </>
       ) : (
-        <span> No habits found</span>
+        <span className="mx-5 sm:mx-20 text-center"> No habits found</span>
       )}
       </div>
 

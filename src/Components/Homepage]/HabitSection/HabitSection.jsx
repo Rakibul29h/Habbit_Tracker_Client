@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import HHabitCard from "../HHabitCard/HHabitCard";
-import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hook/useSecureAxios";
 import Loading from "../../Loading/Loading";
 

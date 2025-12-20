@@ -7,11 +7,9 @@ const HHabitCard = ({ habit }) => {
     _id: id,
     category,
     name,
-    status,
-    streak,
-    time,
+
     title,
-    description,
+  
     photoURL
   } = habit;
   const sectionVariants = {
@@ -29,7 +27,7 @@ const HHabitCard = ({ habit }) => {
       <div className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full border border-gray-100">
     <div className="h-48 overflow-hidden relative">
       <img src={photoURL} alt={title} className="w-full h-full object-cover transform hover:scale-105 transition duration-500" />
-      <span className="absolute top-3 right-3 bg-white/90 px-2 py-1 text-xs font-bold rounded text-teal-700 uppercase">{habit.category}</span>
+      <span className="absolute top-3 right-3 bg-white/90 px-2 py-1 text-xs font-bold rounded text-teal-700 uppercase">{category}</span>
     </div>
     <div className="p-5 grow flex flex-col">
       <h3 className="text-xl font-bold mb-2 text-gray-800">{title}</h3>

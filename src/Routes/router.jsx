@@ -10,6 +10,7 @@ import PublicHabit from '../Pages/PublicHabit/PublicHabit';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/HomePage/Home';
 
+
  export const router=createBrowserRouter([
     {
         path:"/",

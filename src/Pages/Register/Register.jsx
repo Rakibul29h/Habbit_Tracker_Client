@@ -62,7 +62,7 @@ const Register = () => {
     <div>
       <div className="hero px-5 min-h-screen">
     
-          <div className="card md:max-w-[500px] bg-base-100 w-full border border-gray-100 shadow-2xl">
+          <div className="card sm:max-w-[500px] bg-base-100 w-full border border-gray-100 shadow-2xl">
             <div className="card-body">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">
                 Sign Up
