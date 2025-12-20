@@ -1,5 +1,4 @@
 import React from "react";
-import logInimage from "../../assets/LogIn.png";
 import { Link, useLocation, useNavigate } from "react-router";
 import UseAuth from "../../Hook/UseAuth";
 
@@ -30,11 +29,11 @@ const LogIn = () => {
   return (
     <div>
       <div className="hero min-h-screen w-full">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="card bg-base-100 flex-1 shadow-2xl">
+        <div className="hero-content md:min-w-[400px] flex-col ">
+          <div className="card bg-base-100 flex-1 border border-gray-100 shadow-2xl">
             <div className="card-body">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">Sign In</h2>
-              <form className="fieldset text-lg m-2" onSubmit={handleLogIn}>
+              <form className="fieldset  m-2" onSubmit={handleLogIn}>
                 <label className="label">Email</label>
                 <input
                   type="email"
@@ -52,15 +51,12 @@ const LogIn = () => {
                 <div>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
-                <button className="customBtn btn mt-4 text-lg">Sign In</button>
+                <button className="customBtn1 btn mt-4 ">Sign In</button>
                 <div className="text-gray-500">New to our website? <Link to={"/register"} className="text-blue-700 hover:text-blue-500 font-semibold">Sign Up</Link> </div>
                 <div className="text-center">or</div>
               <SocialLogIn></SocialLogIn>
               </form>
             </div>
-          </div>
-          <div className="flex-1 lg:min-w-[450px]">
-            <img className="w-[75%]" src={logInimage} alt="" />
           </div>
         </div>
       </div>

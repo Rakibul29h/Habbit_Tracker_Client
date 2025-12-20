@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router";
 import UseAuth from "../../Hook/UseAuth";
 import person from "../../assets/person.png";
 import toast from "daisyui/components/toast";
-
+import Logo from "../Shared/Logo/Logo";
 
 const Navbar = () => {
   const { user, logOut, loading } = UseAuth();
@@ -16,10 +16,16 @@ const Navbar = () => {
   const link = (
     <>
       <NavLink to={"/"}>Home</NavLink>
-      <NavLink to={"/addHabit"}>Add Habit</NavLink>
-      <NavLink to={"/myHabit"}>My Habit</NavLink>
 
-      <NavLink to={"/publicHabit"}>Browse Public Habits</NavLink>
+      {user && (
+        <>
+          {" "}
+          <NavLink to={"/addHabit"}>Add Habit</NavLink>
+          <NavLink to={"/myHabit"}>My Habit</NavLink>
+        </>
+      )}
+
+      <NavLink to={"/publicHabit"}>Browse</NavLink>
     </>
   );
   return (
@@ -46,13 +52,13 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu text-xl menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {link}
             </ul>
           </div>
-          <Link to={"/"} className="btn btn-ghost text-xl">
-            Habit Tracker
+          <Link to={"/"}>
+            <Logo></Logo>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">

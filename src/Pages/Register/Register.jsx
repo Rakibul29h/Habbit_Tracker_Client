@@ -1,5 +1,4 @@
 import React from "react";
-import signupImage from "../../assets/SignUp.png";
 import { Link, useNavigate } from "react-router";
 import UseAuth from "../../Hook/UseAuth";
 import toast, { Toaster } from "react-hot-toast";
@@ -48,7 +47,7 @@ const Register = () => {
              e.target.reset();
             navigate("/");
           })
-          .catch((err) => toast.error("Something Went Wrong"));
+          .catch(() => toast.error("Something Went Wrong"));
           
       })
       .catch((err) => {
@@ -61,14 +60,14 @@ const Register = () => {
   };
   return (
     <div>
-      <div className="hero min-h-screen">
-        <div className="hero-content w-full  flex-col lg:flex-row-reverse">
-          <div className="card bg-base-100 w-full flex-1 shadow-2xl">
+      <div className="hero px-5 min-h-screen">
+    
+          <div className="card md:max-w-[500px] bg-base-100 w-full border border-gray-100 shadow-2xl">
             <div className="card-body">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">
                 Sign Up
               </h2>
-              <form className="fieldset text-lg" onSubmit={handleForm}>
+              <form className="fieldset " onSubmit={handleForm}>
                 <label className="label">Name</label>
                 <input
                   type="text"
@@ -99,7 +98,7 @@ const Register = () => {
                   name="password"
                   required
                 />
-                <button className="customBtn btn mt-4 py-4 text-lg">
+                <button className="customBtn1 btn mt-4 py-4 ">
                   Sign Up
                 </button>
                 <div className="text-gray-500">
@@ -116,10 +115,8 @@ const Register = () => {
               </form>
             </div>
           </div>
-          <div className="flex-1 lg:min-w-[450px]">
-            <img className="w-[75%]" src={signupImage} alt="" />
-          </div>
-        </div>
+        
+     
       </div>
     </div>
   );

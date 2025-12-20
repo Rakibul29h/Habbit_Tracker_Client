@@ -41,7 +41,7 @@ const PublicHabit = () => {
             Browse Public Habits
           </h2>
         </div>
-        <div className="w-full md:px-10 gap-5 px-4 flex flex-col sm:flex-row justify-between sm:items-center">
+        <div className=" md:px-10 gap-5 px-4 flex flex-col sm:flex-row justify-between sm:items-center">
           <div className=" w-full">
             <label className="input w-full focus:outline-none outline-none">
               <svg
