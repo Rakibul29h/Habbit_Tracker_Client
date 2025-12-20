@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { HabitCard } from "../../Components/Habit/HabitCard/HabitCard";
-// import { SearchBar } from "../../Components/SearchBar/SearchBar";
 import Loading from "../../Components/Loading/Loading";
 import useAxiosSecure from "../../Hook/useSecureAxios";
+import toast from "react-hot-toast";
+import HHabitCard from "../../Components/Homepage]/HHabitCard/HHabitCard";
 
 const PublicHabit = () => {
   const [habits, setHabits] = useState([]);
@@ -29,42 +29,56 @@ const PublicHabit = () => {
     const value = e.target.value;
     setSearchQuery(value);
   };
-  const handleFilter=(e)=>{
-     setFilter(e.target.value);
-  
-  }
+  const handleFilter = (e) => {
+    setFilter(e.target.value);
+  };
 
   return (
     <div className="min-h-[calc(100vh-64px)] pt-10 flex flex-col items-center gap-10">
-      <div className="my-4 px-3  md:px-5">
-        <h2 className="text-3xl md:text-4xl font-bold">
-          Explore Community Habits
-        </h2>
-        <p className="my-2 text-lg text-gray-500">
-          Discover habits shared by others and start building better routines
-          today.
-        </p>
-      </div>
-      <div className="w-full  gap-5 px-4 flex flex-col sm:flex-row justify-between sm:items-center">
-        <div className=" w-full max-w-[400px]">
-          <input
-            type="text"
-            placeholder="Search by habit title"
-            className="input input-bordered  w-full rounded-sm bg-white/90 text-gray-800 placeholder-gray-400 focus:outline-none"
-            onChange={handleChange}
-          />
+      <div className="flex flex-col sm:flex-row w-full justify-between">
+        <div className="my-4 px-3  md:px-5">
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Browse Public Habits
+          </h2>
         </div>
-        <div className="w-full max-w-[400px]">
-          <fieldset className="fieldset w-full focus:outline-0">
-            <select
-              onChange={handleFilter}
-              defaultValue={""}
-              className="select outline-none w-full"
-            >
-              <option disabled value={""}>
-                Filter
-              </option>
-             <option value="morning">Morning</option>
+        <div className="w-full md:px-10 gap-5 px-4 flex flex-col sm:flex-row justify-between sm:items-center">
+          <div className=" w-full">
+            <label className="input w-full focus:outline-none outline-none">
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input
+                type="search"
+                onChange={handleChange}
+                placeholder="Search"
+                className="w-full"
+              />
+            </label>
+          </div>
+          <div className="">
+            <fieldset className="fieldset w-full focus:outline-0">
+              <select
+                onChange={handleFilter}
+                defaultValue={""}
+                className="select outline-none w-full"
+              >
+                <option disabled value={""}>
+                  Filter
+                </option>
+                <option value="morning">Morning</option>
                 <option value="work">Work</option>
                 <option value="fitness">Fitness</option>
                 <option value="evening">Evening</option>
@@ -74,8 +88,9 @@ const PublicHabit = () => {
                 <option value="sleep">Sleep</option>
                 <option value="creativity">Creativity</option>
                 <option value="learning">Learning</option>
-            </select>
-          </fieldset>
+              </select>
+            </fieldset>
+          </div>
         </div>
       </div>
       {loading ? (
@@ -84,7 +99,7 @@ const PublicHabit = () => {
         <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 w-full px-4">
           {habits.length > 0 ? (
             habits.map((habit, index) => (
-              <HabitCard key={index} habit={habit} />
+              <HHabitCard key={index} habit={habit} />
             ))
           ) : (
             <div className="col-span-full text-center text-gray-600">

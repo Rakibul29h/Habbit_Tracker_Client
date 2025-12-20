@@ -13,7 +13,7 @@ const Banner = () => {
         showThumbs={false}
         swipeable={true}
       >
-      <div className="bg-linear-to-r from-orange-200 to-lime-800 min-h-[90vh] flex justify-center items-center text-primary-content">
+      <div className="bg-linear-to-r from-orange-200  to-lime-800 min-h-[90vh] flex justify-center items-center text-black">
         <div className=" container mx-auto px-6 py-20 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Build Better Habits, One Day at a Time
@@ -32,7 +32,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      <div className="bg-linear-to-r from-lime-300 to-teal-600 min-h-[90vh] flex justify-center items-center text-primary-content">
+      <div className="bg-linear-to-r from-lime-300 to-teal-600 min-h-[90vh] flex justify-center items-center text-black">
         <div className="container mx-auto px-6 py-20 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Stay Consistent, See Real Progress
@@ -52,7 +52,7 @@ const Banner = () => {
         </div>
       </div>
 
-      <div className="bg-linear-to-r from-teal-200 to-indigo-800 min-h-[90vh] text-primary-content flex justify-center items-center ">
+      <div className="bg-linear-to-r from-teal-200 to-indigo-800 min-h-[90vh] text-black flex justify-center items-center ">
         <div className="container mx-auto px-6 py-20 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Turn Goals Into Daily Wins
