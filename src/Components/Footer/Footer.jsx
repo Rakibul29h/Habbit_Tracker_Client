@@ -3,19 +3,12 @@ import React from "react";
 import Logo from "../Shared/Logo/Logo";
 import { Link } from "react-router";
 import { FaDiscord, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
-import { motion } from "framer-motion";
+
 
 const Footer = () => {
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
+ 
   return (
-    <motion.footer
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={sectionVariants}
+    <footer
       className="bg-gray-900 text-white py-12 mt-12"
     >
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -53,7 +46,7 @@ const Footer = () => {
         </div>
         <div>
           <h4 className="font-bold mb-4">Contact</h4>
-          <p className="text-gray-400 text-sm">support@habitforge.com</p>
+          <p className="text-gray-400 text-sm">support@habittracker.com</p>
           <p className="text-gray-400 text-sm mt-2">
             123 Productivity Lane, Focus City
           </p>
@@ -74,7 +67,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
         © {new Date().getFullYear()} HabitTracker. All rights reserved.
       </div>
-    </motion.footer>
+    </footer>
   );
 };
 

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
-import useAxiosSecure from "../../Hook/useSecureAxios";
 import toast from "react-hot-toast";
 import HHabitCard from "../../Components/Homepage]/HHabitCard/HHabitCard";
+import useAxios from "../../Hook/useAxios";
 
 const PublicHabit = () => {
   const [habits, setHabits] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxios();
   useEffect(() => {
     setLoading(true);
     axiosSecure
@@ -42,7 +42,7 @@ const PublicHabit = () => {
           </h2>
         </div>
         <div className=" md:px-10 gap-5 px-4 flex flex-col sm:flex-row justify-between sm:items-center">
-          <div className=" w-full">
+          <div className=" w-full min-w-[200px]">
             <label className="input w-full focus:outline-none outline-none">
               <svg
                 className="h-[1em] opacity-50"
@@ -68,7 +68,7 @@ const PublicHabit = () => {
               />
             </label>
           </div>
-          <div className="">
+          <div className="w-full">
             <fieldset className="fieldset w-full focus:outline-0">
               <select
                 onChange={handleFilter}

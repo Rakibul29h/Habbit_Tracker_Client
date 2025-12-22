@@ -55,7 +55,7 @@ const AddHabits = () => {
 
     axiosSecure.post("/habit",newHabit)
     .then((data)=>{
-      console.log(data.data)
+
       if(data.data.insertedId)
       {
         toast.success("Habit added Successfully!")
@@ -136,7 +136,7 @@ const AddHabits = () => {
             <div className="flex-1 space-y-2">
               <label className="label">Remainder</label>
               <br />
-              <input type="time" name="time" className="focus:outline-none input w-full" />
+              <input type="time" name="time" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm border p-2 focus:outline-none input" />
             </div>
           </div>
           <div className="flex gap-5">

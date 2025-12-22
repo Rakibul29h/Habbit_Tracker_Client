@@ -7,11 +7,12 @@ const HHabitCard = ({ habit }) => {
     _id: id,
     category,
     name,
-
+description,
     title,
   
     photoURL
   } = habit;
+
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -31,15 +32,15 @@ const HHabitCard = ({ habit }) => {
     </div>
     <div className="p-5 grow flex flex-col">
       <h3 className="text-xl font-bold mb-2 text-gray-800">{title}</h3>
-      <p className="text-gray-500 text-sm line-clamp-2 mb-4 grow">{habit.description}</p>
+      <p className="text-gray-500 text-sm line-clamp-2 mb-4 grow">{description}</p>
       <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
         <div className="text-xs text-gray-400">By {name}</div>
-        <button 
-          onClick={() => { setSelectedHabit(habit); setView('habit-details'); }}
+        <Link 
+         to={`/details/${id}`}
           className="text-teal-600 text-sm font-semibold hover:text-teal-800 flex items-center"
         >
           View Details <ChevronRight size={16} />
-        </button>
+        </Link>
       </div>
     </div>
   </div>

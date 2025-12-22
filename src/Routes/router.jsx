@@ -9,6 +9,7 @@ import AddHabits from '../Pages/AddHabits/AddHabits';
 import PublicHabit from '../Pages/PublicHabit/PublicHabit';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/HomePage/Home';
+import Details from '../Pages/Details/Details';
 
 
  export const router=createBrowserRouter([
@@ -33,6 +34,12 @@ import Home from '../Pages/HomePage/Home';
                 path:"/myHabit",
                 element:<PrivateRoutes>
                     <MyHabits></MyHabits>
+                </PrivateRoutes>
+            },
+            {
+                path:"/details/:id",
+                element:<PrivateRoutes>
+                    <Details></Details>
                 </PrivateRoutes>
             },
             {

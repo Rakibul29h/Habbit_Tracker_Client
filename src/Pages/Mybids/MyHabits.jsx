@@ -1,10 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import UseAuth from "../../Hook/UseAuth";
 import useAxiosSecure from "../../Hook/useSecureAxios";
-import { CircleCheck, CircleX, Edit, FilePenLine, Trash } from "lucide-react";
+import {
+  CheckCircle2,
+  Circle,
+  CircleCheck,
+  CircleX,
+  Edit,
+  Edit2,
+  FilePenLine,
+  Pencil,
+  Trash,
+  Trash2,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import Loading from '../../Components/Loading/Loading';
+import Loading from "../../Components/Loading/Loading";
 
 const MyHabits = () => {
   const { user } = UseAuth();
@@ -17,29 +28,28 @@ const MyHabits = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-  setLoading(true);
-  axiosSecure.get(`/habit?email=${user.email}`)
-    .then((res) => {
-      setHabit(res.data);
-    })
-    .catch(() => {
-      toast.error("Failed to load habits");
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-    
+    setLoading(true);
+    axiosSecure
+      .get(`/habit?email=${user.email}`)
+      .then((res) => {
+        setHabit(res.data);
+      })
+      .catch(() => {
+        toast.error("Failed to load habits");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [user, axiosSecure]);
-
   const handleComplete = (id) => {
-    axiosSecure.patch(`/habit/${id}`).then((res) => {
-      if (res.data.modifiedCount > 0) {
+    axiosSecure.patch(`/habit/${id}/complete`).then((res) => {
+      
         setHabit((prev) =>
           prev.map((h) =>
-            h._id === id ? { ...h, status: 1, streak: res.data.streak } : h
+            h._id === id ? { ...h, status: res.data.status, effectiveStreak: res.data.effectiveStreak } : h
           )
         );
-      }
+      
     });
   };
 
@@ -67,7 +77,7 @@ const MyHabits = () => {
       visibility,
     };
     const id = EditableHabit._id;
-    axiosSecure.patch(`/habit/${id}`, updatedData).then((res) => {
+    axiosSecure.patch(`/habit/${id}/`, updatedData).then((res) => {
       if (res.data.modifiedCount) {
         closeModal();
         toast.success("UpdatedSuccessFully!");
@@ -106,197 +116,223 @@ const MyHabits = () => {
       }
     });
   };
-  if(loading) return<div className="min-h-screen flex items-center justify-center"><Loading></Loading></div>
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loading></Loading>
+      </div>
+    );
   return (
     <div>
       <div className="my-4 md:my-10 w-full px-1 md:px-5 text-center">
         <h2 className="text-3xl md:text-4xl font-bold">My habits</h2>
-        <p className="my-2 text-lg text-gray-500">Small habits today, a better version of you tomorrow</p>
+        <p className="my-2 text-lg text-gray-500">
+          Small habits today, a better version of you tomorrow
+        </p>
       </div>
       <div className="w-full">
-              {habit?.length > 0 ? (
-        <>
-          <div className="overflow-x-auto my-10 md:my-15 px-2 md:px-5 h-full w-full">
-            <table className="table table-md table-pin-rows table-pin-cols">
-              <thead>
-                <tr className="text-lg">
-                  <th>SL No</th>
-                  <td>Title</td>
-                  <td>Category</td>
-                  <td>Current Streak</td>
-                  <td>Created Date</td>
-                  <td>Status</td>
-                  <td>Action</td>
-                </tr>
-              </thead>
-              <tbody className="item-center">
-                {habit.map((item, index) => (
-                  <tr key={item._id} className="text-[1rem]">
-                    <td>{index + 1}</td>
-                    <td>{item.title}</td>
-                    <td>{item.category}</td>
-                    <td className="px-10">{item.streak || 0}</td>
-                    <td>
-                      {new Date(item.createdAt).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </td>
-                    <td>
-                      {item.status ? (
-                        <div className="flex gap-2 ">
-                          {" "}
-                          <CircleCheck color="#008000" /> Completed{" "}
-                        </div>
-                      ) : (
-                        <button
-                          className="flex justify-center font-semibold hover:text-green-700"
-                          onClick={() => handleComplete(item._id)}
-                        >
-                          {" "}
-                          Complete{" "}
-                        </button>
-                      )}
-                    </td>
-                    <td>
-                      <div className="flex gap-3 ">
-                        <button
-                          className="btn btn-outline btn-info"
-                          onClick={() => handleEdit(item)}
-                        >
-                          <FilePenLine />
-                        </button>
-                        <button
-                          className="btn btn-outline btn-error"
-                          onClick={() => deleteHabit(item._id)}
-                        >
-                          <Trash />
-                        </button>
-                      </div>
-                    </td>
+        {habit?.length > 0 ? (
+          <>
+            <div className="overflow-x-auto my-10 md:my-15 px-2 md:px-5 h-full w-full">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr className="text-lg">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Habit
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Category
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {" "}
+                      Streak
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Created Date
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Action
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          
-          <dialog
-            ref={ModalRef}
-            className="modal modal-bottom sm:modal-middle w-full"
-          >
-            <div className="modal-box max-w-[900px]">
-              <div className="flex justify-end">
-                <button onClick={closeModal} className="p-2">
-                  <CircleX />
-                </button>
-              </div>
-              <form
-                className="fieldset text-lg m-2 space-y-2"
-                onSubmit={updateHabit}
-              >
-                <label className="label">Title</label>
-                <input
-                  type="text"
-                  className="input w-full focus:outline-none"
-                  defaultValue={EditableHabit.title}
-                  placeholder="Enter Title"
-                  name="title"
-                />
-                <label className="label">Description</label>
-                <textarea
-                  className="textarea focus:outline-none w-full h-24"
-                  name="description"
-                  placeholder="Description"
-                  defaultValue={EditableHabit.description}
-                ></textarea>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {habit.map((item) => (
+                    <tr key={item._id} className="hover:bg-gray-50">
+                      <td className="px-6">{item.title}</td>
+                      <td className="px-6">
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-2xl bg-teal-100 text-teal-800">
+                          {item.category}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">
+                        🔥{item.effectiveStreak}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {new Date(item.createdAt).toLocaleDateString("en-GB", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </td>
 
-                <div className="flex flex-col md:flex-row gap-5">
-                  <div className="flex-1 space-y-2">
-                    <label className="label">Category</label>
-                    <br />
-                    <select
-                      defaultValue={EditableHabit.category}
-                      name="category"
-                      className="select m-1 outline-none focus:outline-none w-full"
-                    >
-                      <option disabled value="Select Category">
-                        Select Category
-                      </option>
-                      <option value="morning">Morning</option>
-                      <option value="work">Work</option>
-                      <option value="fitness">Fitness</option>
-                      <option value="evening">Evening</option>
-                      <option value="study">Study</option>
-                      <option value="health">Health</option>
-                      <option value="personal-growth">Personal Growth</option>
-                      <option value="sleep">Sleep</option>
-                      <option value="creativity">Creativity</option>
-                      <option value="learning">Learning</option>
-                    </select>
-                  </div>
-                  <div className="flex-1 space-y-2">
-                    <label className="label">Remainder</label>
-                    <br />
-                    <input
-                      type="time"
-                      name="time"
-                      defaultValue={EditableHabit.time}
-                      className="focus:outline-none input w-full"
-                    />
-                  </div>
+                      <td>
+                        <div className=" pl-6 flex gap-3 ">
+                          {item.status ? (
+                            <button
+                              className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-600 text-white ring-2 ring-emerald-300 transition hover:bg-emerald-700"
+                              title="Completed"
+                            >
+                              <CheckCircle2 className="h-5 w-5" />
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => handleComplete(item._id)}
+                              className="group flex h-9 w-9 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-600 transition hover:bg-emerald-100 hover:ring-2 hover:ring-emerald-300"
+                              title="Mark as complete"
+                            >
+                              <Circle className="h-5 w-5 group-hover:hidden" />
+                              <CheckCircle2 className="hidden h-5 w-5 group-hover:block" />
+                            </button>
+                          )}
+
+                          <button
+                            onClick={() => handleEdit(item)}
+                            className={`flex h-9 w-9 items-center justify-center rounded-full border transition border-blue-200 bg-blue-50 text-blue-600 hover:bg-blue-100 hover:ring-2 hover:ring-blue-300`}
+                            title={"Edit task"}
+                          >
+                            <Pencil className="h-4.5 w-4.5" />
+                          </button>
+
+                          <button
+                            onClick={() => deleteHabit(item._id)}
+                            className="flex h-9 w-9 items-center justify-center rounded-full border border-rose-200 bg-rose-50 text-rose-600 transition hover:bg-rose-100 hover:ring-2 hover:ring-rose-300"
+                            title="Delete task"
+                          >
+                            <Trash2 className="h-4.5 w-4.5" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <dialog
+              ref={ModalRef}
+              className="modal modal-bottom sm:modal-middle w-full"
+            >
+              <div className="modal-box max-w-[900px]">
+                <div className="flex justify-end">
+                  <button onClick={closeModal} className="p-2">
+                    <CircleX />
+                  </button>
                 </div>
-                <div className="flex gap-5">
-                  <div className="flex-1">
-                    <label className="label">Visibility</label>
-                    <div className="flex items-center gap-6 mt-1">
-                      <label className="flex text-lg items-center gap-2">
-                        <input
-                          type="radio"
-                          name="visibility"
-                          value="public"
-                          checked={EditableHabit?.visibility === "public"}
-                          onChange={() =>
-                            setEditableHabit((prev) => ({
-                              ...prev,
-                              visibility: "public",
-                            }))
-                          }
-                          className=" accent-blue-600"
-                        />
-                        Public
-                      </label>
-                      <label className="flex text-lg items-center gap-2">
-                        <input
-                          type="radio"
-                          name="visibility"
-                          value="private"
-                          checked={EditableHabit?.visibility === "private"}
-                          onChange={() =>
-                            setEditableHabit((prev) => ({
-                              ...prev,
-                              visibility: "private",
-                            }))
-                          }
-                          className="accent-blue-500"
-                        />
-                        Private
-                      </label>
+                <form
+                  className="fieldset text-lg m-2 space-y-2"
+                  onSubmit={updateHabit}
+                >
+                  <label className="label">Title</label>
+                  <input
+                    type="text"
+                    className="input w-full focus:outline-none"
+                    defaultValue={EditableHabit.title}
+                    placeholder="Enter Title"
+                    name="title"
+                  />
+                  <label className="label">Description</label>
+                  <textarea
+                    className="textarea focus:outline-none w-full h-24"
+                    name="description"
+                    placeholder="Description"
+                    defaultValue={EditableHabit.description}
+                  ></textarea>
+
+                  <div className="flex flex-col md:flex-row gap-5">
+                    <div className="flex-1 space-y-2">
+                      <label className="label">Category</label>
+                      <br />
+                      <select
+                        defaultValue={EditableHabit.category}
+                        name="category"
+                        className="select m-1 outline-none focus:outline-none w-full"
+                      >
+                        <option disabled value="Select Category">
+                          Select Category
+                        </option>
+                        <option value="morning">Morning</option>
+                        <option value="work">Work</option>
+                        <option value="fitness">Fitness</option>
+                        <option value="evening">Evening</option>
+                        <option value="study">Study</option>
+                        <option value="health">Health</option>
+                        <option value="personal-growth">Personal Growth</option>
+                        <option value="sleep">Sleep</option>
+                        <option value="creativity">Creativity</option>
+                        <option value="learning">Learning</option>
+                      </select>
+                    </div>
+                    <div className="flex-1 space-y-2">
+                      <label className="label">Remainder</label>
+                      <br />
+                      <input
+                        type="time"
+                        name="time"
+                        defaultValue={EditableHabit.time}
+                        className="focus:outline-none input w-full"
+                      />
                     </div>
                   </div>
-                </div>
-                <div className="flex justify-center my-3">
-                  <button className="btn customBtn"> Update</button>
-                </div>
-              </form>
-            </div>
-          </dialog>
-        </>
-      ) : (
-        <span className="mx-5 sm:mx-20 text-center"> No habits found</span>
-      )}
+                  <div className="flex gap-5">
+                    <div className="flex-1">
+                      <label className="label">Visibility</label>
+                      <div className="flex items-center gap-6 mt-1">
+                        <label className="flex text-lg items-center gap-2">
+                          <input
+                            type="radio"
+                            name="visibility"
+                            value="public"
+                            checked={EditableHabit?.visibility === "public"}
+                            onChange={() =>
+                              setEditableHabit((prev) => ({
+                                ...prev,
+                                visibility: "public",
+                              }))
+                            }
+                            className=" accent-blue-600"
+                          />
+                          Public
+                        </label>
+                        <label className="flex text-lg items-center gap-2">
+                          <input
+                            type="radio"
+                            name="visibility"
+                            value="private"
+                            checked={EditableHabit?.visibility === "private"}
+                            onChange={() =>
+                              setEditableHabit((prev) => ({
+                                ...prev,
+                                visibility: "private",
+                              }))
+                            }
+                            className="accent-blue-500"
+                          />
+                          Private
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center my-3">
+                    <button className="btn customBtn"> Update</button>
+                  </div>
+                </form>
+              </div>
+            </dialog>
+          </>
+        ) : (
+          <span className="mx-5 sm:mx-20 text-center"> No habits found</span>
+        )}
       </div>
-
     </div>
   );
 };
