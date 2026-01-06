@@ -3,15 +3,13 @@ import React from "react";
 import Logo from "../Shared/Logo/Logo";
 import { Link } from "react-router";
 import { FaDiscord, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
-
-
 const Footer = () => {
  
   return (
     <footer
       className="bg-gray-900 text-white py-12 mt-12"
     >
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="max-w-[1440px] mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <div className="flex items-center mb-4">
             <Logo></Logo>

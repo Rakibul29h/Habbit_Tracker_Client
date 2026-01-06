@@ -2,13 +2,16 @@ import { Award, ShieldCheck, Target, Zap } from 'lucide-react';
 import React from 'react';
 import BenefitCard from './BenefitCard';
 import { motion } from "framer-motion";
+import Container from '../../Shared/Container/Container';
 const WhyBuildHabit = () => {
       const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
     return (
-        <motion.div
+
+      <Container>
+            <motion.div
         initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
@@ -24,6 +27,8 @@ const WhyBuildHabit = () => {
             </div>
         </div>
         </motion.div>
+      </Container>
+    
     );
 };
 

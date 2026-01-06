@@ -3,6 +3,7 @@ import Loading from "../../Components/Loading/Loading";
 import toast from "react-hot-toast";
 import HHabitCard from "../../Components/Homepage]/HHabitCard/HHabitCard";
 import useAxios from "../../Hook/useAxios";
+import Container from "../../Components/Shared/Container/Container";
 
 const PublicHabit = () => {
   const [habits, setHabits] = useState([]);
@@ -34,7 +35,8 @@ const PublicHabit = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] pt-10 flex flex-col items-center gap-10">
+    <Container>
+          <div className="min-h-[calc(100vh-64px)] pt-10 flex flex-col items-center  gap-10">
       <div className="flex flex-col sm:flex-row w-full justify-between">
         <div className="my-4 px-3  md:px-5">
           <h2 className="text-3xl md:text-4xl font-bold">
@@ -111,6 +113,7 @@ const PublicHabit = () => {
         </div>
       )}
     </div>
+    </Container>
   );
 };
 

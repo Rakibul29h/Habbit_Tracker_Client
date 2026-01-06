@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import UseAuth from "../../Hook/UseAuth";
 import person from "../../assets/person.png";
 import toast from "daisyui/components/toast";
 import Logo from "../Shared/Logo/Logo";
+import { Moon, Sun } from "lucide-react";
 
 const Navbar = () => {
   const { user, logOut, loading } = UseAuth();
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const handleSignOut = () => {
     logOut().catch((err) => {
       toast.error(err);
     });
+  };
+
+    useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+    const handleTheme = () => {
+    theme === "light"? setTheme("dark"):setTheme("light")
   };
 
   const link = (
@@ -29,8 +41,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <div>
-      <div className="navbar bg-base-100 shadow-sm">
+    <div className=" max-w-[1440px] mx-auto  ">
+      <div className="navbar ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -67,6 +79,19 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
+          <div className="mr-2">
+            <button
+            onClick={()=>handleTheme()}
+              className={`p-2 rounded-full transition ${
+                theme==="dark"
+                  ? "hover:bg-gray-700 text-yellow-400"
+                  : "hover:bg-gray-100 text-gray-600"
+              }`}
+              title="Toggle Theme"
+            >
+              {theme==='dark' ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+          </div>
           {loading ? (
             <span className="loading loading-dots loading-md mr-5"></span>
           ) : user ? (

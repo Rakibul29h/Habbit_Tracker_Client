@@ -1,5 +1,10 @@
 @import "tailwindcss";
-@plugin "daisyui" ;
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
@@ -21,5 +26,5 @@ transition-all duration-1000 ease-in-out  hover:shadow-sm hover:shadow-teal-300/
 
 
 .active{
-  @apply text-gray-700 border-b-2
+  @apply text-gray-700 border-b-2 dark:text-gray-200
 }

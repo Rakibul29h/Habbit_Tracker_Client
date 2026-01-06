@@ -11,13 +11,13 @@ const BenefitCard = ({ icon, title, desc }) => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={sectionVariants}
-      className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition text-center"
+      className=" p-6 rounded-lg shadow-sm hover:shadow-md dark:shadow-white/30 transition text-center"
     >
-      <div className="text-teal-600 w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-teal-50 rounded-full">
+      <div className="text-teal-600  w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-teal-50 dark:bg-gray-200 rounded-full">
         {icon}
       </div>
       <h3 className="font-bold text-lg mb-2">{title}</h3>
-      <p className="text-gray-600 text-sm">{desc}</p>
+      <p className="text-gray-600 dark:text-gray-400 text-sm">{desc}</p>
     </motion.div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HHabitCard from "../HHabitCard/HHabitCard";
 import useAxiosSecure from "../../../Hook/useSecureAxios";
 import Loading from "../../Loading/Loading";
+import Container from "../../Shared/Container/Container";
 
 const HabitSection = () => {
   const [habits, setHabit] = useState([]);
@@ -23,8 +24,10 @@ const HabitSection = () => {
 
  
   return (
-    <div>
-      <div className="my-10 md:my-20 px-1 md:px-5 text-center">
+
+    <Container>
+       <div>
+      <div className="my-10 md:my-20 mx-1 md:mx-5  text-center">
         <h2 className="text-3xl md:text-4xl font-bold">Featured Habits</h2>
         <p className="my-2 text-lg text-gray-500">
           Explore the latest public habits created by users to stay motivated and productive.
@@ -39,7 +42,9 @@ const HabitSection = () => {
       </div>
       }
      
-    </div>
+    </div> 
+    </Container>
+  
   );
 };
 

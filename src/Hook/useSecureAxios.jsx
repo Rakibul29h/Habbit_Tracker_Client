@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import UseAuth from './UseAuth';
 
 const instance = axios.create({
-  baseURL: 'https://habit-tracker-server-flax.vercel.app',
+  baseURL: 'http://localhost:3000',
   
 });
 

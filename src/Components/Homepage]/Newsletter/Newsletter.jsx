@@ -13,7 +13,7 @@ const Newsletter = () => {
       variants={sectionVariants}
     className="py-16 md:py-24 max-w-4xl mx-auto px-4 text-center">
       <h2 className="text-2xl font-bold mb-4">Stay Productive</h2>
-      <p className="text-gray-600 mb-6">
+      <p className="text-gray-600 dark:text-gray-400 mb-6">
         Get the latest tips on productivity and habit formation straight to your
         inbox.
       </p>

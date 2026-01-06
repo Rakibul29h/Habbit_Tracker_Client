@@ -6,9 +6,12 @@ import { Toaster } from "react-hot-toast";
 
 const MainLayout = () => {
   return (
-    <div className="max-w-[1440px] mx-auto">
+    <div>
+      <div className="sticky top-0 w-full z-40 bg-white dark:bg-gray-800 shadow-sm ">
+
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      </div>
+            <Outlet></Outlet>
       <Footer></Footer>
       <Toaster></Toaster>
     </div>
