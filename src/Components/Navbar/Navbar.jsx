@@ -38,6 +38,8 @@ const Navbar = () => {
       )}
 
       <NavLink to={"/publicHabit"}>Browse</NavLink>
+      <NavLink to={"/about"}>About Us</NavLink>
+
     </>
   );
   return (
@@ -55,6 +57,7 @@ const Navbar = () => {
               >
                 {" "}
                 <path
+
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"

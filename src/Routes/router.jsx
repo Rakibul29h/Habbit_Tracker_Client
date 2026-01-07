@@ -10,6 +10,7 @@ import PublicHabit from '../Pages/PublicHabit/PublicHabit';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/HomePage/Home';
 import Details from '../Pages/Details/Details';
+import AboutUs from '../Pages/AboutUs/AboutUs';
 
 
  export const router=createBrowserRouter([
@@ -35,6 +36,10 @@ import Details from '../Pages/Details/Details';
                 element:<PrivateRoutes>
                     <MyHabits></MyHabits>
                 </PrivateRoutes>
+            },
+            {
+                path:"/about",
+                element:<AboutUs></AboutUs>
             },
             {
                 path:"/details/:id",

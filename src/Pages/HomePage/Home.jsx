@@ -6,6 +6,10 @@ import WhyBuildHabit from '../../Components/Homepage]/WhyBuildHabit/WhyBuildHabi
 import Stats from '../../Components/Homepage]/Stats/Stats';
 import Newsletter from '../../Components/Homepage]/Newsletter/Newsletter';
 import Banner from './../../Components/Homepage]/Banner';
+import HowITWork from '../../Components/Homepage]/HowItWork/HowITWork';
+import WhatUserSay from '../../Components/Homepage]/WhatUserSay/WhatUserSay';
+import FAQ from '../../Components/Homepage]/FAQ/FAQ';
+
 
 const Home = () => {
     return (
@@ -14,6 +18,9 @@ const Home = () => {
             <HabitSection></HabitSection>
             <WhyBuildHabit></WhyBuildHabit>
             <Stats></Stats>
+            <HowITWork></HowITWork>
+            <WhatUserSay></WhatUserSay>
+            <FAQ></FAQ>
             <Newsletter></Newsletter>
         </div>
     );
