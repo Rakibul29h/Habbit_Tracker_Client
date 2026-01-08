@@ -16,6 +16,7 @@ import {
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import Loading from "../../Components/Loading/Loading";
+import Container from "../../Components/Shared/Container/Container";
 
 const MyHabits = () => {
   const { user } = UseAuth();
@@ -123,7 +124,7 @@ const MyHabits = () => {
       </div>
     );
   return (
-    <div>
+    <Container>
       <div className="my-4 md:my-10 w-full px-1 md:px-5 text-center">
         <h2 className="text-3xl md:text-4xl font-bold">My habits</h2>
         <p className="my-2 text-lg text-gray-500">
@@ -333,7 +334,7 @@ const MyHabits = () => {
           <span className="mx-5 sm:mx-20 text-center"> No habits found</span>
         )}
       </div>
-    </div>
+    </Container>
   );
 };
 

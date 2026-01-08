@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../Hook/useSecureAxios";
 import { useNavigate, useParams } from "react-router";
+import UseAuth from "../../Hook/UseAuth";
 
 const Details = () => {
   const [habit, setHabit] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
-
+  const {user}=UseAuth()
   const handleComplete = (id) => {
     axiosSecure.patch(`/habit/${id}/complete`).then((res) => {
       setHabit((prev) => ({
@@ -58,7 +59,7 @@ const Details = () => {
           Go Back{" "}
         </button>
 
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+        <div className=" rounded-xl shadow-lg dark:shadow-white/20 overflow-hidden flex flex-col md:flex-row">
           <div className="md:w-1/3 h-64 md:h-auto relative">
             <img
               src={habit.photoURL}
@@ -74,7 +75,7 @@ const Details = () => {
           <div className="p-8 md:w-2/3 flex flex-col">
             <div className="flex justify-between items-start">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
                   {habit.title}
                 </h1>
                 <span className="inline-block bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded-full mt-2 font-semibold">
@@ -83,12 +84,12 @@ const Details = () => {
               </div>
             </div>
 
-            <p className="mt-6 text-gray-600 text-lg leading-relaxed">
+            <p className="mt-6 text-gray-600 dark:text-white/60 text-lg leading-relaxed">
               {habit.description}
             </p>
 
             <div className="mt-8">
-              <div className="flex justify-between text-sm mb-1 font-medium text-gray-600">
+              <div className="flex justify-between text-sm mb-1 font-medium text-gray-600 dark:text-white/70">
                 <span>Consistency (Last 30 Days)</span>
                 <span>{Math.round(habit.progress)}%</span>
               </div>
@@ -123,8 +124,8 @@ const Details = () => {
                   </div>
                 </div>
               </div>
-
-              <button
+                        {
+                          user && <button
                 onClick={() => handleComplete(habit._id)}
                 disabled={habit.status === 1}
                 className={`px-6 py-3 rounded-lg font-bold shadow-md transition transform active:scale-95 flex items-center gap-2 ${
@@ -141,6 +142,8 @@ const Details = () => {
                   "Mark Complete"
                 )}
               </button>
+                        }
+              
             </div>
           </div>
         </div>

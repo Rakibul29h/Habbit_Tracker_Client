@@ -39,6 +39,8 @@ const Navbar = () => {
 
       <NavLink to={"/publicHabit"}>Browse</NavLink>
       <NavLink to={"/about"}>About Us</NavLink>
+      <NavLink to={"/contactUs"}>Contact Us</NavLink>
+      
 
     </>
   );

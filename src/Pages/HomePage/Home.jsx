@@ -9,6 +9,8 @@ import Banner from './../../Components/Homepage]/Banner';
 import HowITWork from '../../Components/Homepage]/HowItWork/HowITWork';
 import WhatUserSay from '../../Components/Homepage]/WhatUserSay/WhatUserSay';
 import FAQ from '../../Components/Homepage]/FAQ/FAQ';
+import ReadyToForge from '../../Components/Homepage]/ReadyToForge/ReadyToForge';
+import About from '../../Components/Homepage]/About/About';
 
 
 const Home = () => {
@@ -21,6 +23,8 @@ const Home = () => {
             <HowITWork></HowITWork>
             <WhatUserSay></WhatUserSay>
             <FAQ></FAQ>
+            <About></About>
+            <ReadyToForge></ReadyToForge>
             <Newsletter></Newsletter>
         </div>
     );

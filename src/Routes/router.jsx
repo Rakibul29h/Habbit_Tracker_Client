@@ -11,6 +11,7 @@ import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/HomePage/Home';
 import Details from '../Pages/Details/Details';
 import AboutUs from '../Pages/AboutUs/AboutUs';
+import ContactUs from '../Pages/Contact Us/ContactUs';
 
 
  export const router=createBrowserRouter([
@@ -43,9 +44,8 @@ import AboutUs from '../Pages/AboutUs/AboutUs';
             },
             {
                 path:"/details/:id",
-                element:<PrivateRoutes>
+                element:
                     <Details></Details>
-                </PrivateRoutes>
             },
             {
                 path:"/addHabit",
@@ -56,6 +56,10 @@ import AboutUs from '../Pages/AboutUs/AboutUs';
             {
                 path:"/publicHabit",
                 element:<PublicHabit></PublicHabit>
+            },
+            {
+                path:"/contactUs",
+                element:<ContactUs></ContactUs>
             }
         ]
 
