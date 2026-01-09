@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "habit-tracker-4dbe3"
-  }
+    "default": "habit-tracker-584de",
+    "staging": "habit-tracker-584de",
+    "prod": "habit-tracker-584de"
+  },
+  "targets": {},
+  "etags": {}
 }

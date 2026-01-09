@@ -4,7 +4,7 @@ import { ChevronLeft, User } from 'lucide-react';
 import UseAuth from '../../Hook/UseAuth';
 
 const Profile = () => {
-    const {user}=UseAuth()
+    const {user}=UseAuth();
     return (
         <Container>
              <div className="animate-fade-in flex flex-col items-center justify-center min-h-[60vh] px-4 py-16">

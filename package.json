@@ -13,7 +13,7 @@
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.13.2",
     "daisyui": "^5.4.7",
-    "firebase": "^12.5.0",
+    "firebase": "^12.7.0",
     "framer-motion": "^12.23.26",
     "lucide-react": "^0.553.0",
     "react": "^19.1.1",

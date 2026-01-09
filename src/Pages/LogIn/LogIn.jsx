@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import UseAuth from "../../Hook/UseAuth";
 
@@ -6,10 +6,22 @@ import { toast } from 'react-hot-toast';
 import SocialLogIn from "../../Components/SocialLogin/SocialLogIn";
 const LogIn = () => {
 
-    const {setUser,signIn}=UseAuth();
+
+    const {setUser,signIn,loading}=UseAuth();
   const navigate=useNavigate();
   const location=useLocation();
  
+  const handleDemo=()=>{
+    signIn("mdrakibulislamh10@gmail.com","mdrakibulislamh10@gmail.coM")
+      .then(result=>{
+        setUser(result.user);
+        toast.success("Log In successful!")
+        navigate(`${location.state ? location.state: "/"}`);
+      }).catch(err=>{
+        console.log(err);
+       
+      })
+  }
     const handleLogIn=(e)=>{
       e.preventDefault();
 
@@ -25,6 +37,7 @@ const LogIn = () => {
       })
     }
 
+    if(loading) return <div className="w-full h-screen flex justify-center items-center bg-gray-700 text-white opacity-30"><span className="font-bold text-2xl">Loading</span><span className="loading loading-dots loading-md mr-5"></span></div>
  
   return (
     <div>
@@ -33,6 +46,7 @@ const LogIn = () => {
           <div className="card bg-base-100 w-full sm:max-w-[500px] border border-gray-100 shadow-2xl">
             <div className="card-body">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center my-2 ">Sign In</h2>
+                <button onClick={()=>handleDemo()} className="btn hover:bg-teal-600 btn-outline my-5">Click here for Demo Sign In</button>
               <form className="fieldset  m-2" onSubmit={handleLogIn}>
                 <label className="label">Email</label>
                 <input

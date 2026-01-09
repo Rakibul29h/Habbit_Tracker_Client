@@ -13,7 +13,7 @@ const Register = () => {
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
 
-  const handleForm = (e) => {
+  const handleForm = async(e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
@@ -32,31 +32,40 @@ const Register = () => {
       toast.error("Password must be at least 6 characters long");
       return;
     }
-    createUser(email, password)
-      .then((result) => {
+
+  
+    try {
+        const result = await createUser(email, password);
         const user = result.user;
 
-        updateUser({ displayName: name, photoURL: photoUrl })
-          .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photoUrl });
-            const newUser = { name: name, email: email, photoURL: photoUrl };
+        // 2. Wait for profile to update on Firebase servers
+        await updateUser({ displayName: name, photoURL: photoUrl });
 
-            axiosSecure.post("/users", newUser).then(() => {});
+        // 3. IMPORTANT: Firebase's 'user' object is stale here.
+        // We manually construct the updated user object for our UI.
+        const updatedUser = {
+            ...user,
+            displayName: name,
+            photoURL: photoUrl,
+        };
 
-            toast.success("Account created Successfully");
-             e.target.reset();
-            navigate("/");
-          })
-          .catch(() => toast.error("Something Went Wrong"));
-          
-      })
-      .catch((err) => {
+        // 4. Update the Global Auth State manually
+        setUser(updatedUser);
+
+        // 5. Save to your database
+        const newUser = { name, email, photoURL: photoUrl };
+        await axiosSecure.post("/users", newUser);
+
+        toast.success("Account created Successfully");
+        e.target.reset();
+        navigate("/");
+
+    } catch (err) {
         const msg = err.message
-          .replace("Firebase: Error (auth/", "")
-          .replace(").", "");
-        toast.error(msg || "Somethings went wrong!");
-      });
-  
+            .replace("Firebase: Error (auth/", "")
+            .replace(").", "");
+        toast.error(msg || "Something went wrong!");
+    }
   };
   return (
     <div>
