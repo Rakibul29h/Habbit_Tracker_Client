@@ -135,40 +135,40 @@ const MyHabits = () => {
         {habit?.length > 0 ? (
           <>
             <div className="overflow-x-auto my-10 md:my-15 px-2 md:px-5 h-full w-full">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-900">
+                <thead className="bg-gray-50 dark:bg-gray-800 ">
                   <tr className="text-lg">
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">
                       Habit
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">
                       Category
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">
                       {" "}
                       Streak
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">
                       Created Date
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider">
                       Action
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-900">
                   {habit.map((item) => (
-                    <tr key={item._id} className="hover:bg-gray-50">
+                    <tr key={item._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                       <td className="px-6">{item.title}</td>
                       <td className="px-6">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-2xl bg-teal-100 text-teal-800">
                           {item.category}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200 font-bold">
                         🔥{item.effectiveStreak}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
                         {new Date(item.createdAt).toLocaleDateString("en-GB", {
                           day: "2-digit",
                           month: "short",

@@ -32,8 +32,8 @@ const Navbar = () => {
       {user && (
         <>
           {" "}
-          <NavLink to={"/addHabit"}>Add Habit</NavLink>
-          <NavLink to={"/myHabit"}>My Habit</NavLink>
+          <NavLink to={"/dashboard"}>Dashboard</NavLink>
+   
         </>
       )}
 
