@@ -1,8 +1,7 @@
 # HabitTracker – Build Better Habits, One Day at a Time
 
-🔗 **Live Website:** https://habit-tracker-4dbe3.web.app
-🔗 **Client Repository:** https://github.com/Rakibul29h/Habbit_Tracker_Client
-🔗 **Server Repository:** https://github.com/Rakibul29h/Habit_Tracker_Server 
+🔗 **Live Website:** https://habit-tracker-584de.web.app/publicHabit
+
 
 HabitTracker is a full-stack habit tracking web application that helps users create, manage, and maintain daily habits while building strong streaks to boost productivity and consistency.
 
